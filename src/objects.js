@@ -6132,11 +6132,13 @@ SpriteMorph.prototype.addHighlight = function (oldHighlight) {
     return highlight;
 };
 
+
+
 SpriteMorph.prototype.removeHighlight = function () {
     var highlight = this.getHighlight();
     if (highlight !== null) {
         this.fullChanged();
-        this.removeChild(highlight);
+        this.removeChild(highlight);x
     }
     return highlight;
 };
@@ -6991,7 +6993,7 @@ StageMorph.prototype.fireStopAllEvent = function () {
             nop,
             function () {ide.controlBar.pauseButton.refresh(); }
         ]);
-    }
+    };
 };
 
 StageMorph.prototype.runStopScripts = function () {
@@ -7019,6 +7021,38 @@ StageMorph.prototype.removeAllClones = function () {
         clone.destroy();
     });
     this.cloneCount = 0;
+};
+
+StageMorph.prototype.removeFood = () => {
+    var myself = this,
+        clones = this.children.filter(
+            function (morph) {
+                return morph instanceof SpriteMorph && morph.isTemporary && morph.cloneOriginName == 'food';
+            }
+        );
+    clones.forEach(function (clone) {
+        myself.threads.stopAllForReceiver(clone);
+        clone.detachFromAnchor();
+        clone.corpsify();
+        clone.destroy();
+        this.cloneCount -= 1;
+    });
+};
+
+StageMorph.prototype.removeCells = () => {
+    var myself = this,
+        clones = this.children.filter(
+            function (morph) {
+                return morph instanceof SpriteMorph && morph.isTemporary && morph.cloneOriginName == 'cell';
+            }
+        );
+    clones.forEach(function (clone) {
+        myself.threads.stopAllForReceiver(clone);
+        clone.detachFromAnchor();
+        clone.corpsify();
+        clone.destroy();
+        this.cloneCount -= 1;
+    });
 };
 
 StageMorph.prototype.editScripts = function () {
@@ -9886,3 +9920,80 @@ StagePrompterMorph.prototype.mouseClickLeft = function () {
 StagePrompterMorph.prototype.accept = function () {
     this.isDone = true;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,7 +21,7 @@ Sets the global variable "response".
 I think this is the spot for a callback ... idk?
 */
 ws.onmessage = () => {
-	var response = JSON.parse(event.data);
+	response = JSON.parse(event.data);
 	//console.log(JSON.parse(event.data));
 }
 
@@ -45,7 +45,6 @@ function checkFlag() {
 	if (!flag) {
 		(function(foo) {
     		setTimeout(function() { 
-    			console.log(foo);
   				checkFlag(foo);
     		}, 10);
 		})(flag);
