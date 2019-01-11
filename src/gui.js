@@ -365,10 +365,10 @@ IDE_Morph.prototype.openIn = function (world) {
         }
         if (dict.hideControls) {
             myself.controlBar.hide();
-            window.onbeforeunload = nop;
+            //window.onbeforeunload = nop;
         }
         if (dict.noExitWarning) {
-            window.onbeforeunload = nop;
+            //window.onbeforeunload = nop;
         }
         if (dict.lang) {
             myself.setLanguage(dict.lang, null, true); // don't persist

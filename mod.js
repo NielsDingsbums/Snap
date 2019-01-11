@@ -21,34 +21,23 @@ Sets the global variable "response".
 I think this is the spot for a callback ... idk?
 */
 ws.onmessage = () => {
-	response = JSON.parse(event.data);
+	// event.data;
+	callbacks[JSON.parse(event.data).type](event)
 	//console.log(JSON.parse(event.data));
+}
+var callbacks = {
+
 }
 
 /*
 example usage:
-wsRequest({type: "initCell", data: {name: "jesus"}});
+wsRequest("initCell",{type: "initCell", data: {name: "jesus"}},(data) => {
+	return 
+});
 
 It returns the response of the server.
 */
-function wsRequest(msg) {
+function wsRequest(msg,cb) {
 	ws.send(JSON.stringify(msg));
-	checkFlag();
-	let data = response;
-	response = null;
-	return data;
-}
-
-// check if flag == true;
-function checkFlag() {
-	var flag = response != null;
-	if (!flag) {
-		(function(foo) {
-    		setTimeout(function() { 
-  				checkFlag(foo);
-    		}, 10);
-		})(flag);
-	} else {
-		return
-	}
+	callbacks[msg.type] = cb;
 }
