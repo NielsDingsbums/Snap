@@ -42,3 +42,13 @@ function wsRequest(msg, cb) {
 	ws.send(JSON.stringify(msg));
 	callbacks[msg.type] = cb;
 }
+
+function listify(jsonObject) {
+  if (jsonObject instanceof Array) {
+    return new List(jsonObject.map(function(eachElement) { return listify(eachElement)}));
+  } else if (jsonObject instanceof Object) {
+    return new List(Object.keys(jsonObject).map(function(eachKey) { return new List([listify(jsonObject[eachKey])])} ))
+  } else {
+    return jsonObject
+  }
+}
