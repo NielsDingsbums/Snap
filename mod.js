@@ -52,3 +52,10 @@ function listify(jsonObject) {
     return jsonObject
   }
 }
+
+
+// game vars
+
+var cells = [];
+var food = [];
+var currentPlayer = {};
