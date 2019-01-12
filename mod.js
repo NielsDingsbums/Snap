@@ -14,30 +14,29 @@ Data in the request *is not* proprietary.
 Data in the response on the other hand *is* proprietary (unless the request is invalid).
 */
 
-/*
-Is getting called whenever the server sends any message / response.
-Sets the global variable "response".
-
-I think this is the spot for a callback ... idk?
-*/
 ws.onmessage = () => {
-	// event.data;
 	callbacks[JSON.parse(event.data).type](event)
-	//console.log(JSON.parse(event.data));
+	
 }
 var callbacks = {
-
+	// exampleStructure after wsRequest({type: "initCell", data: {name: "jesus"}}, (data) => {console.log(data)}) was called
+	
+	/*
+		initCell: (data) => {
+			console.log(data);
+		}
+	*/
 }
 
 /*
 example usage:
 wsRequest("initCell",{type: "initCell", data: {name: "jesus"}},(data) => {
-	return 
+	console.log(data); 
 });
 
 It returns the response of the server.
 */
-function wsRequest(msg,cb) {
+function wsRequest(msg, cb) {
 	ws.send(JSON.stringify(msg));
 	callbacks[msg.type] = cb;
 }
