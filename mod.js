@@ -17,7 +17,7 @@ Data in the response on the other hand *is* proprietary (unless the request is i
 ws.onmessage = () => {
 	callbacks[JSON.parse(event.data).type](event)
 	// delete itttttt (lit)
-	delete callbacks[JSON.parse(event.data).type](event)
+	delete callbacks[JSON.parse(event.data).type]
 
 }
 var callbacks = {
