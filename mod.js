@@ -53,6 +53,11 @@ function listify(jsonObject) {
   }
 }
 
+function toRel(center, point) {
+	var x = point[0] - center[0];
+	var y = point[1] - center[1];
+	return [x,y];
+}
 
 // game vars
 
