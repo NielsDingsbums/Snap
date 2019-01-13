@@ -59,6 +59,16 @@ function toRel(center, point) {
 	return [x,y];
 }
 
+/*
+to get the same coords you gave toRel() you have to use the same center and the output of toRel
+*/
+
+function toAbs(center, point) {
+	var x = point[0] + center[0];
+	var y = point[1] + center[1];
+	return [x,y]	
+}
+
 // game vars
 
 var cells = [];
