@@ -1,6 +1,7 @@
 // mod.js  
 
 var ws = new WebSocket("ws://localhost:361/");
+var alreadyready = false;
 
 var world;
 window.onload = function () {
@@ -13,10 +14,15 @@ window.onload = function () {
 function loop() {
     requestAnimationFrame(loop);
     //console.log("test")
-	ready = world.children[0].projectName == "project";
-	if (ready) {
-		wsRequest({type: "ready"})
-	}
+	if (!alreadyready) {
+        ready = world.children[0].projectName == "project";
+        if (ready) {
+            wsRequest({type: "ready"}, () => {
+                console.log("ready")
+				alreadyready = true;
+            })
+        }
+    }
     world.doOneCycle();
 }
 
@@ -25,8 +31,10 @@ var state;
 
 ws.onmessage = () => {
 	let type = JSON.parse(event.data).type;
+	console.log(type)
 	if (type == "state") {
 		state = JSON.parse(event.data).data;
+		console.log(state);
 	} else if (type == "") {
 		// do nothing
 	} else {
